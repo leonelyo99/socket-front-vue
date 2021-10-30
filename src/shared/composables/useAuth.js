@@ -7,8 +7,8 @@ const useAuth = () => {
     const store = useStore()
 
     const createUser = async( user ) => {
-        const resp = await store.dispatch('auth/signup', user )
-        return resp
+        const {ok} = await store.dispatch('auth/signup', user )
+        if (ok) router.push({ name: "page" });
     }
 
     const loginUser = async( user ) => {

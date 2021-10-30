@@ -69,12 +69,12 @@
           <span class="img-see input-group-text">
             <img
               v-if="!seeRepeatPassword"
-              src="/assets/icons/see.svg"
+              src="@/assets/icons/see.svg"
               class="figure-img img-fluid see-img"
             />
             <img
               v-if="seeRepeatPassword"
-              src="/assets/icons/not-see.svg"
+              src="@/assets/icons/not-see.svg"
               class="figure-img img-fluid see-img"
             />
           </span>
@@ -110,6 +110,8 @@ export default {
     const router = useRouter();
     const { createUser } = useAuth();
 
+    const seePassword = ref(false);
+    const seeRepeatPassword = ref(false);
     const registerForm = ref({
       email: "",
       username: "",
@@ -119,16 +121,29 @@ export default {
 
     return {
       registerForm,
+      seePassword,
+      seeRepeatPassword,
       validForm: () =>
-        !!loginForm.value.email &&
-        !!loginForm.value.username &&
-        !!loginForm.value.password &&
-        loginForm.value.password === loginForm.value.repeatPassword,
+        !!registerForm.value.email &&
+        !!registerForm.value.username &&
+        !!registerForm.value.password &&
+        registerForm.value.password === registerForm.value.repeatPassword,
       onSubmit: async () => {
-        const { ok } = await createUser(registerForm.value);
-        if (ok) router.push({ name: "no-entry" });
+        await createUser(registerForm.value);
       },
     };
   },
 };
 </script>
+<style scoped>
+.img-see {
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.see-img {
+  filter: invert(20%);
+  margin: auto;
+}
+</style>
