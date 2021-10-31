@@ -3,9 +3,9 @@ import store from '@/store'
 
 const isAuthenticatedGuard = async( to, from, next ) => {
 
-    const { ok } = await store.dispatch('auth/checkAuthentication')
+    const token = store.getters["auth/getToken"];
 
-    if ( ok ) next()
+    if ( !!token && token.length > 1 ) next()
     else next({ name: 'login' })
 }
 

@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import isAuthenticatedGuard from "../modules/auth/router/auth-guard";
 import authRouter from "../modules/auth/router";
 import pageRouter from "../modules/page/router";
 
@@ -13,6 +14,7 @@ const routes = [
   },
   {
     path: "/page",
+    beforeEnter: [isAuthenticatedGuard],
     ...pageRouter,
   },
   {

@@ -22,7 +22,7 @@ api.interceptors.response.use(
   function(resp) {
     if (!!resp.headers && !!resp.headers["X-Token"]) {
       const token = resp.headers["X-Token"];
-      store.commit("saveToken", token);
+      store.dispatch("setToken", token);
     }
     return resp.data;
   },

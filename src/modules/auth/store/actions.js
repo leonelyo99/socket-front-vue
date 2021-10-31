@@ -24,6 +24,10 @@ export const login = async ({ commit }, user) => {
   }
 };
 
+export const setToken = ({ commit }, token) => {
+  commit("saveToken", token);
+}; 
+
 export const logout = ({ commit }) => {
   commit("logout");
 };
