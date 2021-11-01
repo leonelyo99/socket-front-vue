@@ -15,6 +15,9 @@ const useSocket = () => {
   let subscriptionListenError = null;
   let subscriptionListenNotification = null;
 
+  /**
+   * Listen to messages from a specific room and before listening, check if there was already a previous instance to unsubscribe
+   */
   const listenMessage = () => {
     !!subscriptionListenMessage?.connected &&
       subscriptionListenMessage.removeListener();
@@ -29,6 +32,9 @@ const useSocket = () => {
     );
   };
 
+  /**
+   * listen to error for the logged in user
+   */
   subscriptionListenError = socket.on(`error`, (error) => {
     Swal.fire("Error", getErrorMessage(error.data.message), "error");
     if (error && error.data.status === 401) {
@@ -36,10 +42,16 @@ const useSocket = () => {
     }
   });
 
+  /**
+   * Emit the messages to the back
+   */
   const newMessage = (message) => {
     socket.emit("new-message", message);
   };
 
+  /**
+   * listen to notifications for the logged in user
+   */
   subscriptionListenNotification = socket.on(
     `notification-${store.getters["auth/getUserId"]}`,
     (resp) => {
