@@ -4,15 +4,6 @@
       <h3 class="mt-3 mb-3">Contactos</h3>
       <a @click="logout" class="link-secondary pointer">Salir</a>
     </div>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar User"
-        aria-label="Buscar User"
-        aria-describedby="basic-addon1"
-      />
-    </div>
     <div v-for="(contact, index) in contacts" :key="`contact-${index}`">
       <button
         @click="() => handleSetContact(index)"
