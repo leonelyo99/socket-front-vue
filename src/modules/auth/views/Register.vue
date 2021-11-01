@@ -11,7 +11,7 @@
           class="form-control"
           placeholder="Email"
           aria-label="Email"
-          v-model="registerForm.email"
+          v-model.trim="registerForm.email"
           required
           minlength="3"
         />
@@ -22,7 +22,7 @@
           class="form-control"
           placeholder="Username"
           aria-label="Username"
-          v-model="registerForm.username"
+          v-model.trim="registerForm.username"
           required
           minlength="5"
         />
@@ -33,7 +33,7 @@
           class="form-control"
           placeholder="Password"
           aria-label="Password"
-          v-model="registerForm.password"
+          v-model.trim="registerForm.password"
           required
           minlength="5"
         />
@@ -58,7 +58,7 @@
           class="form-control"
           placeholder="Repeat Password"
           aria-label="Repeat Password"
-          v-model="registerForm.repeatPassword"
+          v-model.trim="registerForm.repeatPassword"
           required
           minlength="5"
         />
@@ -102,8 +102,6 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import useAuth from "../../../shared/composables/useAuth";
-
-import Swal from "sweetalert2";
 
 export default {
   setup() {

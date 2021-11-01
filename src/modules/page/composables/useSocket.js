@@ -1,9 +1,10 @@
 import { onUnmounted } from "vue";
 import { useStore } from "vuex";
 import { io } from "socket.io-client";
-import { SOCKET_URL } from "../../../shared/api";
 import Swal from "sweetalert2";
-import useAuth from "../../../shared/composables/useAuth";;
+import getErrorMessage from "../../../shared/helpers/errors.helper";
+import { SOCKET_URL } from "../../../shared/api";
+import useAuth from "../../../shared/composables/useAuth";
 
 const useSocket = () => {
   const socket = io(SOCKET_URL);
@@ -29,9 +30,9 @@ const useSocket = () => {
   };
 
   subscriptionListenError = socket.on(`error`, (error) => {
-    Swal.fire("Error", error.data.message, "error");
+    Swal.fire("Error", getErrorMessage(error.data.message), "error");
     if (error && error.data.status === 401) {
-      logout()
+      logout();
     }
   });
 
@@ -39,9 +40,12 @@ const useSocket = () => {
     socket.emit("new-message", message);
   };
 
-  subscriptionListenNotification = socket.on(`notification-${store.getters["auth/getUserId"]}`, (resp) => {
-    store.dispatch("page/setNewNotification", resp.data);
-  });
+  subscriptionListenNotification = socket.on(
+    `notification-${store.getters["auth/getUserId"]}`,
+    (resp) => {
+      store.dispatch("page/setNewNotification", resp.data);
+    }
+  );
 
   onUnmounted(() => {
     !!subscriptionListenMessage?.connected &&
@@ -50,7 +54,7 @@ const useSocket = () => {
     !!subscriptionListenError?.connected &&
       subscriptionListenError.removeListener();
 
-      !!subscriptionListenNotification?.connected &&
+    !!subscriptionListenNotification?.connected &&
       subscriptionListenNotification.removeListener();
   });
 

@@ -34,8 +34,6 @@ import useChat from "../composables/useChat";
 
 export default {
   setup() {
-    console.log("Chat component");
-
     const store = useStore();
     const newMessageInput = ref("");
 
@@ -43,7 +41,6 @@ export default {
     const { room, token, username, messages, userId } = useChat();
     
     const send = () => {
-      console.log(room, token, username, messages, userId)
       if (!!newMessageInput.value && !!room) {
         newMessage({
           message: newMessageInput.value,

@@ -7,4 +7,5 @@ export default () => ({
   messages: [],
   contacts: [],
   notifications: [],
+  loading: false
 });

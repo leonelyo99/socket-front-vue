@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import store from '../../store'
+import getErrorMessage from "../helpers/errors.helper";
 
 export const SOCKET_URL = 'http://localhost:9090';
 export const API_URL = 'http://localhost:9090/api';
@@ -27,11 +28,12 @@ api.interceptors.response.use(
     return resp.data;
   },
   function(error) {
-    Swal.fire("Error", error.response.data.message, "error");
-    if (error && error.response.status === 401) {
-      store.dispatch('auth/logout')
-      window.location.replace("/");
-    }
+    Swal.fire("Error", getErrorMessage(error.response.data.message), "error").then(()=>{
+      if (error && error.response.status === 401) {
+        store.dispatch('auth/logout')
+        window.location.replace("/");
+      }
+    });
     return Promise.reject(error);
   }
 );

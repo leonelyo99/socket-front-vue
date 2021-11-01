@@ -11,7 +11,7 @@
           class="form-control"
           placeholder="Username"
           aria-label="Username"
-          v-model="loginForm.username"
+          v-model.trim="loginForm.username"
           required
           minlength="3"
         />
@@ -22,7 +22,7 @@
           class="form-control"
           placeholder="Password"
           aria-label="Password"
-          v-model="loginForm.password"
+          v-model.trim="loginForm.password"
           required
           minlength="4"
         />
@@ -62,7 +62,6 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import Swal from "sweetalert2";
 import useAuth from "../../../shared/composables/useAuth";
 
 export default {

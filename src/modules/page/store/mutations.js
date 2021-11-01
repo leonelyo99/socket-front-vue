@@ -21,3 +21,7 @@ export const notifications = (state, notifications) => {
 export const room = (state, room) => {
     state.room = room;
 }
+
+export const loading = (state) => {
+    state.loading = !state.loading;
+}

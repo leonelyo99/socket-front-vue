@@ -17,3 +17,7 @@ export const getSelectedContact = ( state ) => {
 export const getNotifications = ( state ) => {
     return state.notifications
 }
+
+export const getLoading = ( state ) => {
+    return state.loading
+}

@@ -3,11 +3,13 @@ import store from "../../../store";
 
 export const getContacts = async ({ commit }) => {
   try {
+    store.dispatch("page/setLoading");
     const { error, data } = await api.get("/user/users");
 
     const contacts = data.filter(
       (user) => user._id !== store.getters["auth/getUserId"]
     );
+    store.dispatch("page/setLoading");
     if (!error) {
       commit("contacts", contacts);
       await store.dispatch("page/setSelectedContactAndRom", 0).then(() => {
@@ -15,12 +17,13 @@ export const getContacts = async ({ commit }) => {
       });
     }
   } catch (error) {
+    store.dispatch("page/setLoading");
     return { ok: false };
   }
 };
 
 export const setSelectedContactAndRom = async ({ commit }, index) => {
-  console.log("setSelectedContactAndRom");
+  store.dispatch("page/setLoading");
   const selectedUser = store.getters["page/getContacts"][index];
   const values = {
     users: [{ id: selectedUser._id }, { id: store.getters["auth/getUserId"] }],
@@ -38,20 +41,26 @@ export const setSelectedContactAndRom = async ({ commit }, index) => {
       commit("receiveMessageNewChat", data.messages);
       commit("selectedContact", selectedUser);
     }
+    store.dispatch("page/setLoading");
     return { ok: true };
   } catch (error) {
+    store.dispatch("page/setLoading");
     return { ok: false };
   }
 };
 
-export const setReceiveMessage = async ({ commit }, data) => {
+export const setReceiveMessage = ({ commit }, data) => {
   commit("receiveMessage", data);
 };
 
-export const setNewNotification = async ({ commit }, notification) => {
+export const setNewNotification = ({ commit }, notification) => {
   const notifications = store.getters["page/getNotifications"];
   const selectedUser = store.getters["page/getSelectedContact"];
 
   selectedUser._id != notification &&
     commit("notifications", [...notifications, notification]);
+};
+
+export const setLoading = ({ commit }) => {
+  commit("loading");
 };
