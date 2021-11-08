@@ -1,6 +1,6 @@
 export default () => ({
   room: "",
-  selectedContact: {
+  selectedUser: {
     username: "",
     _id: "",
   },

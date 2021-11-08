@@ -10,8 +10,8 @@ export const getContacts = ( state ) => {
     return state.contacts
 }
 
-export const getSelectedContact = ( state ) => {
-    return state.selectedContact
+export const getSelectedUser = ( state ) => {
+    return state.selectedUser
 }
 
 export const getNotifications = ( state ) => {

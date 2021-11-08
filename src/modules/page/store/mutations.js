@@ -10,8 +10,8 @@ export const contacts = (state, contacts) => {
     state.contacts = [...contacts];
 }
 
-export const selectedContact = (state, selectedContact) => {
-    state.selectedContact = selectedContact;
+export const selectedUser = (state, selectedUser) => {
+    state.selectedUser = selectedUser;
 }
 
 export const notifications = (state, notifications) => {

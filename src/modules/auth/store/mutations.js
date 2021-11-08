@@ -6,7 +6,6 @@ export const loginUser = (state, { username, token, _id }) => {
     state.username = username;
     state.token = token;
     state.userId = _id;
-    state.authenticated = true;
 };
 
 export const logout = (state) => {
@@ -17,7 +16,6 @@ export const logout = (state) => {
   state.token = null;
   state.username = null;
   state.userId = null;
-  state.authenticated = false;
 };
 
 export const saveToken = (token) => {

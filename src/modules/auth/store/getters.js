@@ -1,7 +1,3 @@
-export const getCurrentState = ( state ) => {
-    return state.authenticated
-}
-
 export const getToken = ( state ) => {
     return state.token
 }

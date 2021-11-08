@@ -1,16 +1,15 @@
 <template>
-  <div class="container">
-    <div
-      class="
+  <div
+    class="
+      container
       container-height
       d-flex
       align-content-center
       flex-wrap
       justify-content-center
     "
-    >
-      <router-view />
-    </div>
+  >
+    <router-view />
   </div>
 </template>
 
@@ -22,6 +21,4 @@ export default {};
 .container-height {
   height: 100vh;
 }
-
-
 </style>

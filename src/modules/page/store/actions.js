@@ -39,7 +39,7 @@ export const setSelectedContactAndRom = async ({ commit }, index) => {
       commit("notifications", notifications);
       commit("room", data.room);
       commit("receiveMessageNewChat", data.messages);
-      commit("selectedContact", selectedUser);
+      commit("selectedUser", selectedUser);
     }
     store.dispatch("page/setLoading");
     return { ok: true };
