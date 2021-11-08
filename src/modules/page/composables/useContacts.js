@@ -12,7 +12,7 @@ const useContacts = () => {
 
   return {
     contacts: computed(() => store.getters["page/getContacts"]),
-    selectedUser: computed(() => store.getters["page/getSelectedContact"]),
+    selectedUser: computed(() => store.getters["page/getSelectedUser"]),
     haveNotification,
     handleSetContact: (index) => {
       store.dispatch("page/setSelectedContactAndRom", index).then(() => {

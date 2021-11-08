@@ -2,6 +2,10 @@ export const getRoom = ( state ) => {
     return state.room
 }
 
+export const getPrevRoom = ( state ) => {
+    return state.prevRoom
+}
+
 export const getMessages = ( state ) => {
     return state.messages
 }

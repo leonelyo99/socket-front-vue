@@ -19,9 +19,9 @@ const useSocket = () => {
    * Listen to messages from a specific room and before listening, check if there was already a previous instance to unsubscribe
    */
   const listenMessage = () => {
-    !!subscriptionListenMessage?.connected &&
-      subscriptionListenMessage.removeListener();
-
+    if (!!subscriptionListenMessage && !!subscriptionListenMessage.connected) {
+      socket.off(`message-${store.getters["page/getPrevRoom"]}`)
+    }
     subscriptionListenMessage = socket.on(
       `message-${store.getters["page/getRoom"]}`,
       (resp) => {
@@ -60,14 +60,17 @@ const useSocket = () => {
   );
 
   onUnmounted(() => {
-    !!subscriptionListenMessage?.connected &&
-      subscriptionListenMessage.removeListener();
+    if (!!subscriptionListenMessage && !!subscriptionListenMessage.connected) {
+      subscriptionListenMessage.disconnect();
+    }
 
-    !!subscriptionListenError?.connected &&
-      subscriptionListenError.removeListener();
+    if (!!subscriptionListenError && !!subscriptionListenError.connected) {
+      subscriptionListenError.disconnect();
+    }
 
-    !!subscriptionListenNotification?.connected &&
-      subscriptionListenNotification.removeListener();
+    if (!!subscriptionListenNotification && !!subscriptionListenNotification.connected) {
+      subscriptionListenNotification.disconnect();
+    }
   });
 
   return {

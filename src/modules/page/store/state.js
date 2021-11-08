@@ -1,5 +1,6 @@
 export default () => ({
   room: "",
+  prevRoom: "",
   selectedUser: {
     username: "",
     _id: "",

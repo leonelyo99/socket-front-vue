@@ -22,6 +22,10 @@ export const room = (state, room) => {
     state.room = room;
 }
 
+export const prevRoom = (state, prevRoom) => {
+    state.prevRoom = prevRoom;
+}
+
 export const loading = (state) => {
     state.loading = !state.loading;
 }

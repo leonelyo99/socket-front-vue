@@ -36,6 +36,7 @@ export const setSelectedContactAndRom = async ({ commit }, index) => {
       const notifications = store.getters["page/getNotifications"].filter(
         (userId) => userId !== selectedUser._id
       );
+      commit("prevRoom", store.getters["page/getRoom"])
       commit("notifications", notifications);
       commit("room", data.room);
       commit("receiveMessageNewChat", data.messages);
@@ -55,7 +56,7 @@ export const setReceiveMessage = ({ commit }, data) => {
 
 export const setNewNotification = ({ commit }, notification) => {
   const notifications = store.getters["page/getNotifications"];
-  const selectedUser = store.getters["page/getSelectedContact"];
+  const selectedUser = store.getters["page/getSelectedUser"];
 
   selectedUser._id != notification &&
     commit("notifications", [...notifications, notification]);
